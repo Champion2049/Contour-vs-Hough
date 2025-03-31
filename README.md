@@ -93,6 +93,7 @@ python hough_transform.py
 |---------------------|-----------------------------------------------------------------------------|
 | `contour.py`       | Implements contour detection for path tracking.                           |
 | `hough_transform.py` | Implements Hough transform for line detection and tracking.                |
+| `requirements.txt` | Lists all Python dependencies required for the project.                   |
 
 ---
 
