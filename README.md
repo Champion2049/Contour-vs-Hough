@@ -2,7 +2,6 @@
 
 # 🚗 Contour Tracking vs Hough Transform: RC Car Experiment
 
-![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Python Version](https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10%20%7C%203.11-blue)
 ![Raspberry Pi](https://img.shields.io/badge/Raspberry%20Pi-4-red)
 
@@ -94,7 +93,6 @@ python hough_transform.py
 |---------------------|-----------------------------------------------------------------------------|
 | `contour.py`       | Implements contour detection for path tracking.                           |
 | `hough_transform.py` | Implements Hough transform for line detection and tracking.                |
-| `requirements.txt` | Lists all Python dependencies required for the project.                   |
 
 ---
 
@@ -120,11 +118,6 @@ Steps to contribute:
 
 ---
 
-## 📄 License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
 
 ## 📚 References
 
