@@ -3,25 +3,11 @@
 # 🚗 Contour Tracking vs Hough Transform: RC Car Experiment
 
 ![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Python Version](https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10-blue)
+![Python Version](https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10%20%7C%203.11-blue)
 ![Raspberry Pi](https://img.shields.io/badge/Raspberry%20Pi-4-red)
 
 This repository contains Python implementations of **Contour Tracking** and **Hough Transform Tracking** algorithms, designed to control an RC car using a Raspberry Pi. The goal is to compare the performance of these two techniques in detecting and following paths or obstacles in real-time environments .
 
----
-
-## 📜 Table of Contents
-
-1. [Overview](#overview)
-2. [Features](#features)
-3. [Setup Instructions](#setup-instructions)
-4. [Usage](#usage)
-5. [Files](#files)
-6. [Results](#results)
-7. [Contributing](#contributing)
-8. [License](#license)
-
----
 
 ## 📌 Overview
 
