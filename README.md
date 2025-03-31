@@ -131,6 +131,3 @@ Steps to contribute:
 
 Feel free to reach out if you have any questions or need further assistance!
 
----
-
-This README provides a comprehensive overview of your project, making it easy for others to understand, replicate, and contribute. Let me know if you'd like further refinements!
