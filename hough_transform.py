@@ -3,6 +3,7 @@ import cv2
 import numpy as np
 from gpiozero import Motor
 import time
+import matplotlib.pyplot as plt
 
 # Initialize camera
 picam2 = Picamera2()
@@ -24,6 +25,11 @@ prev_error = 0
 integral = 0
 base_speed = 1.0
 turn_speed = 0.5
+
+# Error tracking
+error_history = []
+time_stamps = []
+start_time = time.time()
 
 def update_motors(left_speed, right_speed):
     flmotor.forward(left_speed) if left_speed > 0 else flmotor.backward(-left_speed)
@@ -59,6 +65,10 @@ def hough_transform_tracking(frame):
     correction = (Kp * error) + (Ki * integral) + (Kd * derivative)
     prev_error = error
 
+    # Log error and timestamp
+    error_history.append(error)
+    time_stamps.append(time.time() - start_time)
+
     left_speed = base_speed - correction * 0.002  
     right_speed = base_speed + correction * 0.002  
 
@@ -74,18 +84,39 @@ def hough_transform_tracking(frame):
     update_motors(left_speed, right_speed)
 
     cv2.line(frame, (cx, int(height * 0.7)), (cx, height), (0, 255, 0), 3)
+    cv2.putText(frame, f"Error: {error}", (10, 80),
+                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2)
     return frame
 
 # Main Loop
-while True:
-    frame = picam2.capture_array()
-    frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+try:
+    while True:
+        frame = picam2.capture_array()
+        frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
 
-    processed_frame = hough_transform_tracking(frame)
+        processed_frame = hough_transform_tracking(frame)
 
-    cv2.imshow("Hough Transform Path Tracking", processed_frame)
+        cv2.imshow("Hough Transform Path Tracking", processed_frame)
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
 
-cv2.destroyAllWindows()
+finally:
+    # Stop motors
+    flmotor.stop()
+    frmotor.stop()
+    blmotor.stop()
+    brmotor.stop()
+
+    # Save error graph
+    plt.figure(figsize=(10, 5))
+    plt.plot(time_stamps, error_history, label="PID Error", color='blue')
+    plt.xlabel("Time (s)")
+    plt.ylabel("Error")
+    plt.title("PID Error Over Time (Hough Transform Tracking)")
+    plt.legend()
+    plt.grid(True)
+    plt.savefig("hough_error_tracking_graph.png")
+    plt.show()
+
+    cv2.destroyAllWindows()
